@@ -23,5 +23,9 @@ body{
 
 button{
    border-radius: 10px;
-   
+
+}
+
+.form{
+    background-color: black;
 }
