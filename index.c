@@ -2,39 +2,49 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <unistd.h>
 
 int main() {
+    printf("Length: ");
 
-printf("Length:  ");
+    int length;
+    scanf("%d", &length);
 
-int length;
-scanf("%d", &length);
+    if (length <= 0) {
+        printf("Password length must be >= 1!\n");
+        return 1;
+    }
 
-if (length <= 0) {
-    printf("Password length must be >= 1!");
+    char *password = (char *)malloc(length + 1);
+    if (password == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
 
+    char *uppers = "ABCDEFGHIJKLMNPQRSTUWYZ";
+    int uppers_length = strlen(uppers);
 
-    return 1;
-char *password = malloc(length + 1);
+    srand((unsigned int)(time(NULL) * getpid()));
 
-free(password);
+    for (int i = 0; i < length; i++) {
+        int char_type = rand() % 4;
 
-char *digits = "0123456789";
-int digits_length = strlen(digits);
+        if (char_type == 0)
+            password[i] = "0123456789"[rand() % 10];
+        else if (char_type == 1)
+            password[i] = "abcdefghijklmnpqrstuwyz"[rand() % 26];
+        else if (char_type == 2)
+            password[i] = uppers[rand() % uppers_length];
+        else
+            password[i] = "!@#$%^&*()"[rand() % 10];
+    }
 
-char *lowers = "abcdefghijklmnpqrstuwyz";
-int lowers_length = strlen(lowers);
-int uppers_length = strlen(uppers);
+    password[length] = '\0';
 
-char *symbols = "!@#$%^&*()";
+    printf("Password: %s\n", password);
 
-int symbols_length = strlen(symbols);
-
-
-
-
-}
-
+    free(password);
 
     return 0;
 }
