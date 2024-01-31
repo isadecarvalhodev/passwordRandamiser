@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 int main() {
-    printf("Length: ");
+   /* printf("Length: ");
 
     int length;
     scanf("%d", &length);
@@ -48,3 +48,53 @@ int main() {
 
     return 0;
 }
+*/
+
+
+printf("Content-type: text/html\n\n");
+
+    // Print the HTML document
+    printf("<html>\n");
+    printf("<head><title>Password Generator</title></head>\n");
+    printf("<body>\n");
+
+    // Check for query string parameters (if using CGI)
+    char *queryString = getenv("QUERY_STRING");
+
+    if (queryString != NULL) {
+        // Parse query string to extract parameters
+        int length;
+        if (sscanf(queryString, "length=%d", &length) == 1 && length > 0) {
+            // Generate and display the password
+            char *password = (char *)malloc(length + 1);
+            if (password != NULL) {
+                srand((unsigned int)(time(NULL) * getpid()));
+
+                // Password generation logic
+                // ...
+
+                printf("Generated Password: %s\n", password);
+
+                free(password);
+            } else {
+                printf("Memory allocation failed.\n");
+            }
+        } else {
+            printf("Invalid password length.\n");
+        }
+    } else {
+        // Print the HTML form to capture user input
+        printf("<form action=\"/cgi-bin/your_cgi_program.cgi\" method=\"get\">\n");
+        printf("Password Length: <input type=\"number\" name=\"length\">\n");
+        printf("<input type=\"submit\" value=\"Generate Password\">\n");
+        printf("</form>\n");
+    }
+
+    // Close the HTML document
+    printf("</body>\n");
+    printf("</html>\n");
+
+    return 0;
+}
+
+

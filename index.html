@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Randmiser!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Workbench&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 
 </head>
@@ -15,8 +19,14 @@
     <div class="center-container">
         <div class="center-box">
 
-            <h1>Password Generetor</h1>
-            <p>Give me a numer of caracters bitch:</p>
+            <h1>Password Generator:</h1>
+            <p>Give me a numer of caracteres bitch:</p>
+
+            <form action="/cgi-bin/your_cgi_program.cgi" method="get">
+                <label for="length">Password Length:</label>
+                <input type="number" id="length" name="length" required>
+                <button type="submit">Generate Password</button>
+            </form>
         </div>
 
     </div>
